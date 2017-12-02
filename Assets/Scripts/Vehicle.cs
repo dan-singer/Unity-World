@@ -55,6 +55,7 @@ public abstract class Vehicle : MonoBehaviour {
         debugLineRenderer = GetComponent<DebugLineRenderer>();
         coll = GetComponent<Collider>();
         wanderOffset = Random.Range(0, 10.0f);
+        pathInfo.CalculatePoints();
     }
 
     /// <summary>
@@ -294,16 +295,47 @@ public abstract class Vehicle : MonoBehaviour {
 
     /// <summary>
     /// Return a force that causes this object to follow the path, as described in the pathInfo field.
+    /// Parameters and points are stored in the pathInfo field.
     /// </summary>
     protected Vector3 FollowPath()
     {
-        //Determine where this object is going to be
-        Vector3 futureLoc = transform.position + (Velocity * pathInfo.secondsAhead);
-        Vector3 A = futureLoc - pathInfo.start;
-        Vector3 B = pathInfo.end = pathInfo.start;
-        float theta = Mathf.Acos(Vector3.Dot(A, B) / (A.magnitude * B.magnitude));
-        //Continue here
-        return Vector3.zero;
+        float minNormalDist = float.MaxValue;
+        Vector3 target = Vector3.zero;
+        //Determine the nearest path segment
+        for (int i=0; i<pathInfo.Points.Length-1; i++)
+        {
+            //See where this object will be in the future
+            Vector3 futureLoc = transform.position + (Velocity * pathInfo.secondsAhead);
+            Vector3 start = pathInfo.Points[i];
+            Vector3 end = pathInfo.Points[i + 1];
+
+            //points from starting point to future location 
+            Vector3 startToFuture = futureLoc - start;
+            //points from start to end 
+            Vector3 pathNormalized = (end - start).normalized;
+            //Calculate point where normal of line and future location will meet when projected
+            Vector3 projectedPt = start + pathNormalized * Vector3.Dot(startToFuture, pathNormalized);
+
+            //See if the projected point is actually on this path segment
+            if (!Mathf.Approximately(Vector3.Distance(start,end), Vector3.Distance(start,projectedPt) + Vector3.Distance(projectedPt, end)))
+            {
+                projectedPt = Vector3.Distance(transform.position, start) < Vector3.Distance(transform.position, end) ? start : end;
+            }
+            debugLineRenderer.DrawLine(0, transform.position, projectedPt);
+
+            //Calculate distance to that normal point
+            float distToNormal = (projectedPt - futureLoc).magnitude;
+            if (distToNormal < minNormalDist)
+            {
+                minNormalDist = distToNormal;
+                target = projectedPt + (pathNormalized * pathInfo.distAhead);
+            }
+        }
+
+        if (minNormalDist > pathInfo.radius)
+            return Seek(target);
+        else
+            return Vector3.zero;
     }
 
 

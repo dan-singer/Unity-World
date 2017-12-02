@@ -16,7 +16,7 @@ public class DebugLineRenderer : MonoBehaviour {
 
     private static event Action<bool> DrawChanged;
 
-    private static bool draw = false;
+    private static bool draw = true;
     /// <summary>
     /// Static Draw property, indicating whether ANY debug lines should be drawn.
     /// </summary>

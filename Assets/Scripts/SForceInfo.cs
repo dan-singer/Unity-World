@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,8 +34,18 @@ public class WanderInfo : SForceRadiusInfo{
 /// Group info about path following force
 public class PathFollowInfo : SForceInfo{
     public float radius;
+    public float distAhead;
     public float secondsAhead;
-    public Vector3 start, end;
+    public Transform pathParent;
+    public Vector3[] Points { get; private set; }
+    public void CalculatePoints()
+    {
+        Transform[] temp = pathParent.GetComponentsInChildren<Transform>();
+
+        Points = new Vector3[temp.Length - 1];
+        for (int i = 1; i < temp.Length; i++)
+            Points[i - 1] = temp[i].position;
+    }
 }
 
 
