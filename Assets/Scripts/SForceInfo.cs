@@ -38,6 +38,9 @@ public class PathFollowInfo : SForceInfo{
     public float secondsAhead;
     public Transform pathParent;
     public Vector3[] Points { get; private set; }
+    /// <summary>
+    /// Populate the Points array with the positions of the children of the pathParent Transform.
+    /// </summary>
     public void CalculatePoints()
     {
         Transform[] temp = pathParent.GetComponentsInChildren<Transform>();
@@ -47,7 +50,6 @@ public class PathFollowInfo : SForceInfo{
             Points[i - 1] = temp[i].position;
     }
 }
-
 
 
 

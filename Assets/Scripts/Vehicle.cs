@@ -41,6 +41,7 @@ public abstract class Vehicle : MonoBehaviour {
     public SForceInfo alignInfo;
     public SForceInfo cohereInfo;
     public PathFollowInfo pathInfo;
+    public SForceInfo flowFieldInfo;
 
     public bool ignoreY = true;
 
