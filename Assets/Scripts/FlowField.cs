@@ -8,21 +8,41 @@ using UnityEngine;
 /// <author>Dan Singer</author>
 
 [RequireComponent(typeof(Renderer))]
-public class FlowField : MonoBehaviour {
+public abstract class FlowField : MonoBehaviour {
 
-    public int unitsPerCell = 15;
+    //Number of units in each cell. The lower this is, the more detailed the flow field is.
+    public float unitsPerCell = 0.5f;
 
-    private Renderer rend;
-    public Vector3[,,] Grid { get; private set; }
+    protected Renderer rend;
+    protected Vector3 boundsSize;
+    protected Vector3 cellSize;
 
-    delegate bool BoolDel(int i);
+    public Vector3[,,] Grid { get; protected set; }
+
 
 
     // Use this for initialization
     void Start () {
-        Vector3 size = rend.bounds.extents * 2;
-        Grid = new Vector3[(int)size.x / unitsPerCell, (int)size.y / unitsPerCell, (int)size.z / unitsPerCell];
+        rend = GetComponent<Renderer>();
+        boundsSize = rend.bounds.extents * 2;
+
+        //Divide the size of the bounds in each dimension by unitsPerCell. 
+        //In other words, we have a size in units times cells per unit, so units divide out, and we're left with number of cells in each dimension
+        Grid = new Vector3[(int)(boundsSize.x / unitsPerCell), (int)(boundsSize.y / unitsPerCell), (int)(boundsSize.z / unitsPerCell)];
+        //Now we can determine the size of each cell in each dimension, in case the box is not uniformly scaled
+        cellSize = new Vector3(
+            boundsSize.x / Grid.GetLength(0),
+            boundsSize.y / Grid.GetLength(1),
+            boundsSize.z / Grid.GetLength(2)
+        );
+        //Let subclasses set the flow field vectors
+        SetFlowVectors();
 	}
+
+    /// <summary>
+    /// Set the flow field vectors (called at start)
+    /// </summary>
+    protected abstract void SetFlowVectors();
     
     /// <summary>
     /// Get the flow vector provided a world position
@@ -30,18 +50,28 @@ public class FlowField : MonoBehaviour {
     /// <returns>The flow vector if it exists, null otherwise</returns>
     public Vector3? GetFlowVector(Vector3 worldPosition)
     {
-        Vector3 origin = transform.position + new Vector3(-rend.bounds.extents.x, -rend.bounds.extents.y, rend.bounds.extents.z);
+        Vector3 origin = transform.position - rend.bounds.extents;
+        //Get position relative to bottom left corner of flow field
         Vector3 localPos = worldPosition - origin;
 
-        int i = (int)localPos.z / unitsPerCell;
-        int j = (int)localPos.x / unitsPerCell;
-        int k = (int)localPos.y / unitsPerCell;
+        //Divide by the cell size in each direction to determine the index in the grid array
+        int x = (int)(localPos.x / cellSize.x);
+        int y = (int)(localPos.y / cellSize.y);
+        int z = (int)(localPos.z / cellSize.z);
 
-        BoolDel inArr = (int index) => { return index >= 0 && index < Grid.GetLength(0); };
-
-        if (inArr(i) && inArr(j) && inArr(k))
-            return Grid[i, j, k];
+        //Confirm that each index is valid in the Grid array, otherwise return null
+        if (IndexInGrid(x, 0) && IndexInGrid(y, 1) && IndexInGrid(z, 2))
+            return Grid[x, y, z];
         else
             return null;
+    }
+
+    /// <summary>
+    /// Check if the provided index in the specified dimension of the Grid array is valid.
+    /// </summary>
+    /// <returns>True if valid, false if not</returns>
+    private bool IndexInGrid(int index, int dimension)
+    {
+        return index >= 0 && index < Grid.GetLength(dimension);
     }
 }

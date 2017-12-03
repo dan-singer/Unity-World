@@ -29,6 +29,10 @@ public class PursueEvadeInfo : SForceInfo{
 public class WanderInfo : SForceRadiusInfo{
     public float unitsAhead;
 }
+[System.Serializable]
+public class FlowFieldInfo : PursueEvadeInfo{
+
+}
 
 [System.Serializable]
 /// Group info about path following force
@@ -44,7 +48,6 @@ public class PathFollowInfo : SForceInfo{
     public void CalculatePoints()
     {
         Transform[] temp = pathParent.GetComponentsInChildren<Transform>();
-
         Points = new Vector3[temp.Length - 1];
         for (int i = 1; i < temp.Length; i++)
             Points[i - 1] = temp[i].position;

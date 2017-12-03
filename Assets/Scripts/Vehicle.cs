@@ -41,7 +41,7 @@ public abstract class Vehicle : MonoBehaviour {
     public SForceInfo alignInfo;
     public SForceInfo cohereInfo;
     public PathFollowInfo pathInfo;
-    public SForceInfo flowFieldInfo;
+    public FlowFieldInfo flowFieldInfo;
 
     public bool ignoreY = true;
 
@@ -56,7 +56,8 @@ public abstract class Vehicle : MonoBehaviour {
         debugLineRenderer = GetComponent<DebugLineRenderer>();
         coll = GetComponent<Collider>();
         wanderOffset = Random.Range(0, 10.0f);
-        pathInfo.CalculatePoints();
+        if (pathInfo.pathParent != null)
+            pathInfo.CalculatePoints();
     }
 
     /// <summary>
@@ -337,6 +338,18 @@ public abstract class Vehicle : MonoBehaviour {
             return Seek(target);
         else
             return Vector3.zero;
+    }
+
+    /// <summary>
+    /// Get a force which will cause this vehicle to align with the provided flow field at the position specified. Return Vector3.zero if not in the flow field.
+    /// </summary>
+    protected Vector3 FollowFlowField(FlowField field, Vector3 position)
+    {
+        Vector3? dir = field.GetFlowVector(position);
+        if (!dir.HasValue)
+            return Vector3.zero;
+
+        return Align(dir.Value);
     }
 
 
