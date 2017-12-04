@@ -12,7 +12,6 @@ public class FlowFollower : Vehicle
         if (currentFlowField)
         {
             netForce += FollowFlowField(currentFlowField, transform.position + Velocity * flowFieldInfo.secondsAhead) * flowFieldInfo.weight;
-            print(netForce);
         }
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
         ApplyForce(netForce);

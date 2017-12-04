@@ -16,6 +16,7 @@ public abstract class FlowField : MonoBehaviour {
     protected Renderer rend;
     protected Vector3 boundsSize;
     protected Vector3 cellSize;
+    protected DebugLineRenderer debugLineRenderer;
 
     public Vector3[,,] Grid { get; protected set; }
 
@@ -24,6 +25,7 @@ public abstract class FlowField : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rend = GetComponent<Renderer>();
+        debugLineRenderer = GetComponent<DebugLineRenderer>();
         boundsSize = rend.bounds.extents * 2;
 
         //Divide the size of the bounds in each dimension by unitsPerCell. 
@@ -73,5 +75,31 @@ public abstract class FlowField : MonoBehaviour {
     private bool IndexInGrid(int index, int dimension)
     {
         return index >= 0 && index < Grid.GetLength(dimension);
+    }
+
+    /// <summary>
+    /// Draw Debug lines
+    /// </summary>
+    private void Update()
+    {
+        DrawDebugLines();
+    }
+
+    /// <summary>
+    /// Draws a line for each vector in the flow field. NOTE: This is very expensive!
+    /// </summary>
+    private void DrawDebugLines()
+    {
+        Vector3 origin = transform.position - rend.bounds.extents;
+
+        for (int x = 0; x < Grid.GetLength(0); x++)
+            for (int y = 0; y < Grid.GetLength(1); y++)
+                for (int z = 0; z < Grid.GetLength(2); z++)
+                {
+                    Vector3 direction = Grid[x, y, z];
+                    Vector3 localPos = new Vector3(x * cellSize.x, y * cellSize.y, z * cellSize.z);
+                    Vector3 worldPos = origin + localPos;
+                    debugLineRenderer.DrawLine(0, worldPos, worldPos + direction);
+                }
     }
 }

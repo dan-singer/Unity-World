@@ -333,6 +333,8 @@ public abstract class Vehicle : MonoBehaviour {
                 target = projectedPt + (pathNormalized * pathInfo.distAhead);
             }
         }
+        debugLineRenderer.DrawLine(1, transform.position, target);
+
 
         if (minNormalDist > pathInfo.radius)
             return Seek(target);
