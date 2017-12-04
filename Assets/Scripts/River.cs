@@ -18,8 +18,6 @@ public class River : FlowField
     /// </summary>
     protected override void SetFlowVectors()
     {
-        //TODO: Switch direction of river flow (waver from side to side instead)
-
         float maxAngle = Mathf.PI * 2 * waves;
         float increment = maxAngle / Grid.GetLength(2); //Divide by length of z-axis, as this is the direction the wave should flow.
 
@@ -33,7 +31,7 @@ public class River : FlowField
                     //This is based on a sine wave, and the instantaneous velocity of a sin wave is given by cos
                     float derivative = Mathf.Cos(curAngle);
                     float angle = Mathf.Atan(derivative) * Mathf.Rad2Deg;
-                    Vector3 flow = Quaternion.Euler(-angle, 0, 0) * new Vector3(0, 0, 1);
+                    Vector3 flow = Quaternion.Euler(0, -angle, 0) * new Vector3(0, 0, 1);
                     Grid[x, y, z] = flow;
                     curAngle += increment;
                 }
