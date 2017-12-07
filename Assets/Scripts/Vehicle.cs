@@ -26,9 +26,9 @@ public abstract class Vehicle : MonoBehaviour {
     protected DebugLineRenderer debugLineRenderer;
 
     //Floats for force-based movement
-    public float mass;
-    public float maxSpeed;
-    public float maxForce;
+    public float mass = 1;
+    public float maxSpeed = 5;
+    public float maxForce = 10;
 
 
     //Detailed force info
@@ -272,6 +272,7 @@ public abstract class Vehicle : MonoBehaviour {
                 netForce += (sepForce * weight);
             }
         }
+        //We seek this instead of just applying the net force so it's consistent with the other behaviours.
         return Seek(transform.position + netForce);
     }
 
