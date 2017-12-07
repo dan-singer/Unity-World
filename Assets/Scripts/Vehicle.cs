@@ -387,6 +387,15 @@ public abstract class Vehicle : MonoBehaviour {
         Acceleration = Vector3.zero;
     }
 
+    protected virtual void CollisionOccurring(Collider other)
+    {
+        Volume vol = other.GetComponent<Volume>();
+        if (vol)
+        {
+            ApplyForce(vol.GetForce(this));
+        }
+    }
+
     /// <summary>
     /// Draw debug lines for this object's forward and right axes in the game view.
     /// </summary>
@@ -407,4 +416,5 @@ public abstract class Vehicle : MonoBehaviour {
         SetForward();
         DrawDebugLines();
 	}
+
 }
