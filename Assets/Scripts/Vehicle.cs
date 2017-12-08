@@ -387,6 +387,9 @@ public abstract class Vehicle : MonoBehaviour {
         Acceleration = Vector3.zero;
     }
 
+    /// <summary>
+    /// Respond to volumes. By default, all vehicles will do this unless you override this method.
+    /// </summary>
     protected virtual void CollisionOccurring(Collider other)
     {
         Volume vol = other.GetComponent<Volume>();

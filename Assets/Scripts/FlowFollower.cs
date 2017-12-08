@@ -11,6 +11,7 @@ public class FlowFollower : Vehicle
         Vector3 netForce = Vector3.zero;
         if (currentFlowField)
         {
+            //TODO: refactor vehicle class such that parameters don't need to be provided, but are just read from the info objects.
             netForce += FollowFlowField(currentFlowField, transform.position + Velocity * flowFieldInfo.secondsAhead) * flowFieldInfo.weight;
         }
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
