@@ -19,6 +19,7 @@ public class PathFollower : Vehicle
     private State state;
 
     public FoodManager foodManager;
+    public GameObject foodDropZone;
     private GameObject foodTarget;
 
     protected override void Start()
@@ -36,14 +37,14 @@ public class PathFollower : Vehicle
                 netForce += FollowPath() * pathInfo.weight;
                 break;
             case State.Foraging:
-                netForce += Seek(foodTarget.transform.position) * seekInfo.weight;
+                netForce += Arrive(foodTarget.transform.position) * arrivalInfo.weight;
                 break;
             case State.Placing:
                 break;
             default:
                 break;
         }
-        
+        netForce += Avoid(GameManager.Instance.Foragers, avoidInfo.radius) * avoidInfo.weight;
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
         ApplyForce(netForce);
     }
@@ -55,11 +56,24 @@ public class PathFollower : Vehicle
             state = State.Foraging;
             foodTarget = foodManager.GetFoodTarget();
         }
-        if (coll.gameObject.GetInstanceID() == foodTarget.GetInstanceID())
+        if (foodTarget && coll.gameObject.GetInstanceID() == foodTarget.GetInstanceID())
         {
             foodTarget.transform.parent = this.transform;
             foodTarget.transform.localPosition = new Vector3(0, 1, 0);
             state = State.FollowingPath;
+        }
+        if (foodTarget && coll.gameObject.GetInstanceID() == foodDropZone.GetInstanceID())
+        {
+            foodTarget.transform.position += transform.forward;
+            foodTarget.transform.position = new Vector3
+            {
+                x = foodTarget.transform.position.x,
+                y = Terrain.activeTerrain.SampleHeight(foodTarget.transform.position),
+                z = foodTarget.transform.position.z
+            };
+            foodTarget.transform.parent = null;
+            foodTarget = null;
+
         }
     }
     private void CollisionEnded(Collider coll)

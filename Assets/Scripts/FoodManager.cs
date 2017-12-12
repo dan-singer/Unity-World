@@ -11,11 +11,13 @@ public class FoodManager : MonoBehaviour {
     public GameObject foodPrefab;
     //x is min, y is max
     public Vector2 quantityBounds;
+    public float padding = 1;
 
     private Renderer rend;
     private Terrain terrain;
 
     private Queue<GameObject> foodQueue;
+
 
 
 	// Use this for initialization
@@ -39,7 +41,10 @@ public class FoodManager : MonoBehaviour {
     /// </summary>
     public GameObject GetFoodTarget()
     {
-        return foodQueue.Dequeue();
+        GameObject food = foodQueue.Dequeue();
+        if (foodQueue.Count == 0)
+            SpawnFood();
+        return food;
     }
 
     /// <summary>
@@ -53,9 +58,9 @@ public class FoodManager : MonoBehaviour {
             Vector3 min = rend.bounds.min; Vector3 max = rend.bounds.max;
             Vector3 spawnLoc = new Vector3
             {
-                x = Random.Range(min.x, max.x),
+                x = Random.Range(min.x + padding, max.x - padding),
                 y = 0,
-                z = Random.Range(min.z, max.z)
+                z = Random.Range(min.z + padding, max.z - padding)
             };
             spawnLoc.y = terrain.SampleHeight(spawnLoc);
             GameObject food = Instantiate<GameObject>(foodPrefab, spawnLoc, Quaternion.identity);

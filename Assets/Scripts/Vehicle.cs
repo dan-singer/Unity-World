@@ -36,6 +36,7 @@ public abstract class Vehicle : MonoBehaviour {
     public SForceInfo fleeInfo;
     public PursueEvadeInfo pursueInfo;
     public PursueEvadeInfo evadeInfo;
+    public SForceRadiusInfo arrivalInfo;
     public SForceInfo constrainInfo;
     public SForceRadiusInfo avoidInfo;
     public SForceRadiusInfo separationInfo;
@@ -182,15 +183,40 @@ public abstract class Vehicle : MonoBehaviour {
     }
 
     /// <summary>
+    /// Get a force which causes this vehicle to arrive at the target. Parameters come from the arrivalInfo object.
+    /// </summary>
+    protected Vector3 Arrive(Vector3 target)
+    {
+        float radius = arrivalInfo.radius;
+        float dist = (transform.position - target).magnitude;
+        if (dist < radius)
+        {
+            float percentage = dist / radius;
+            Vector3 targetOffset = target - transform.position;
+            Vector3 desiredVel = targetOffset.normalized * maxSpeed * percentage;
+            return (desiredVel - Velocity); 
+        }
+        else
+        {
+            return Seek(target);
+        }
+
+    }
+
+    /// <summary>
     /// Return a force which avoids the most threatening obstacle in the provided list.
     /// </summary>
-    protected Vector3 Avoid(List<Transform> obstacles, float avoidRadius)
+    protected Vector3 Avoid<T>(List<T> obstacles, float avoidRadius) where T:Component
     {
         Vector3 netForce = Vector3.zero;
         Vector3 desiredVel = Vector3.zero;
         float nearest = float.MaxValue;
-        foreach (Transform obstacle in obstacles)
+        foreach (T obstacle in obstacles)
         {
+            //Don't avoid myself!
+            if (obstacle.gameObject.GetInstanceID() == gameObject.GetInstanceID())
+                continue;
+
             //Ignore obstacles behind the vehicle
             Vector3 obsLocalPos = obstacle.transform.position - transform.position;
             if (ignoreY)
