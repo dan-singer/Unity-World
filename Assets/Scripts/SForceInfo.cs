@@ -40,6 +40,7 @@ public class PathFollowInfo : SForceInfo{
     public float radius;
     public float distAhead;
     public float secondsAhead;
+    public bool bidirectional;
     public Transform pathParent;
     public Vector3[] Points { get; private set; }
     /// <summary>

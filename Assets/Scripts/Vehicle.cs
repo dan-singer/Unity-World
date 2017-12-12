@@ -32,6 +32,8 @@ public abstract class Vehicle : MonoBehaviour {
 
 
     //Detailed force info
+    public SForceInfo seekInfo;
+    public SForceInfo fleeInfo;
     public PursueEvadeInfo pursueInfo;
     public PursueEvadeInfo evadeInfo;
     public SForceInfo constrainInfo;
@@ -302,6 +304,9 @@ public abstract class Vehicle : MonoBehaviour {
     /// </summary>
     protected Vector3 FollowPath()
     {
+        if (!pathInfo.pathParent)
+            return Vector3.zero;
+
         float minNormalDist = float.MaxValue;
         Vector3 target = Vector3.zero;
         //Determine the nearest path segment
@@ -316,6 +321,13 @@ public abstract class Vehicle : MonoBehaviour {
             Vector3 startToFuture = futureLoc - start;
             //points from start to end 
             Vector3 pathNormalized = (end - start).normalized;
+            //If we can travel the path in any direction
+            if (pathInfo.bidirectional)
+            {
+                //If the velocity vector and the path direction vector are obtuse (in pretty different directions), flip the path direction to match the vehicle
+                if (Vector3.Dot(Velocity, pathNormalized) < 0)
+                    pathNormalized *= -1;
+            }
             //Calculate point where normal of line and future location will meet when projected
             Vector3 projectedPt = start + pathNormalized * Vector3.Dot(startToFuture, pathNormalized);
 
