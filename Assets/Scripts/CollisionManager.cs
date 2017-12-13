@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ public class CollisionManager : MonoBehaviour {
     /// <summary>
     /// An array of all the colliders in the scene.
     /// </summary>
-    public Collider[] AllColliders { get; private set; }
+    public List<Collider> AllColliders { get; private set; }
 
     /// <summary>
     /// Graph representing collision checks this frame.
@@ -36,6 +37,9 @@ public class CollisionManager : MonoBehaviour {
 
 
     private bool readyToUpdateColliders = false;
+
+    private Queue<Collider> collidersToRemove;
+    private Queue<Collider> collidersToAdd;
 
 
     /// <summary>
@@ -46,23 +50,36 @@ public class CollisionManager : MonoBehaviour {
     private static string collisionEndedMessage = "CollisionEnded";
 
     /// <summary>
-    /// Update the list of all the colliders.
-    /// Be sure to call this when instanitating or destroying anything.
+    /// Remove a collider from the list.
     /// </summary>
-    public void UpdateAllColliders()
+    public void RemoveCollider(Collider toRemove)
     {
+        collidersToRemove.Enqueue(toRemove);
         readyToUpdateColliders = true;
     }
 
+    /// <summary>
+    /// Add a collider to the list. This is only necessary if a collider is spawned during gameplay.
+    /// </summary>
+    public void AddCollider(Collider toAdd)
+    {
+        AllColliders.Add(toAdd);
+        readyToUpdateColliders = true;
+    }
 
     /// <summary>
     /// Initialize the CollisionManager.
     /// </summary>
     void Start () {
-        AllColliders = Object.FindObjectsOfType<Collider>();
+        AllColliders = Object.FindObjectsOfType<Collider>().ToList();
         Collisions = new Dictionary<Collider, HashSet<Collider>>();
+        collidersToRemove = new Queue<Collider>();
+        collidersToAdd = new Queue<Collider>();
     }
 
+    /// <summary>
+    /// Notify both colliders of the collision event that just occured
+    /// </summary>
     private void InformColliders(string msg, Collider A, Collider B)
     {
         A.BroadcastMessage(msg, B, SendMessageOptions.DontRequireReceiver);
@@ -74,10 +91,10 @@ public class CollisionManager : MonoBehaviour {
     /// </summary>
     private void Update()
     {
-        for (int i=0; i<AllColliders.Length-1; i++)
+        for (int i=0; i<AllColliders.Count-1; i++)
         {
             Collider A = AllColliders[i];
-            for (int j=i+1; j<AllColliders.Length; j++)
+            for (int j=i+1; j<AllColliders.Count; j++)
             {
                 Collider B = AllColliders[j];
                 bool colliding;
@@ -110,13 +127,29 @@ public class CollisionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Clear each CollisionChecks graph, and update AllColliders array if necessary.
+    /// Handle collider removal and adding in late update so we don't edit the list while iterating over it
     /// </summary>
     void LateUpdate () {
 
+        //Handle collider removal after update loop so we don't 
         if (readyToUpdateColliders)
         {
-            AllColliders = Object.FindObjectsOfType<Collider>();
+            while (collidersToRemove.Count > 0)
+            {
+                Collider toRem = collidersToRemove.Dequeue();
+                AllColliders.Remove(toRem);
+                Collisions.Remove(toRem);
+                foreach (HashSet<Collider> set in Collisions.Values)
+                {
+                    if (set.Contains(toRem))
+                        set.Remove(toRem);
+                }
+            }
+            while (collidersToAdd.Count > 0)
+            {
+                Collider toAdd = collidersToAdd.Dequeue();
+                AllColliders.Add(toAdd);
+            }
             readyToUpdateColliders = false;
         }
     }
