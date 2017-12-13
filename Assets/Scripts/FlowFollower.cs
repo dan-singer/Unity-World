@@ -9,27 +9,21 @@ public class FlowFollower : Vehicle
     protected override void CalcSteeringForces()
     {
         Vector3 netForce = Vector3.zero;
-        if (currentFlowField)
-        {
-            //TODO: refactor vehicle class such that parameters don't need to be provided, but are just read from the info objects.
-            netForce += FollowFlowField(currentFlowField, transform.position + Velocity * flowFieldInfo.secondsAhead) * flowFieldInfo.weight;
-        }
+        //TODO: refactor vehicle class such that parameters don't need to be provided, but are just read from the info objects.
+        netForce += FollowFlowField(flowFieldInfo.flowField, transform.position + Velocity * flowFieldInfo.secondsAhead) * flowFieldInfo.weight;
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
 
 
-        if (currentFlowField)
+        Bounds bounds = flowFieldInfo.flowField.GetComponent<Renderer>().bounds;
+        if (transform.position.z > bounds.max.z)
         {
-            Bounds bounds = currentFlowField.GetComponent<Renderer>().bounds;
-            if (transform.position.z > bounds.max.z)
+            transform.position = new Vector3
             {
-                transform.position = new Vector3
-                {
-                    x = transform.position.x,
-                    y = transform.position.y,
-                    z = bounds.min.z
-                };
-                print("looping");
-            }
+                x = transform.position.x,
+                y = transform.position.y,
+                z = bounds.min.z
+            };
+            print("looping");
         }
 
 
@@ -39,10 +33,7 @@ public class FlowFollower : Vehicle
 
     private void CollisionStarted(Collider coll)
     {
-        if (coll.GetComponent<FlowField>())
-        {
-            currentFlowField = coll.GetComponent<FlowField>();
-        }
+
     }
     private void CollisionEnded(Collider coll)
     {

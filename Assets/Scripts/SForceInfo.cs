@@ -31,7 +31,7 @@ public class WanderInfo : SForceRadiusInfo{
 }
 [System.Serializable]
 public class FlowFieldInfo : PursueEvadeInfo{
-
+    public FlowField flowField;
 }
 
 [System.Serializable]

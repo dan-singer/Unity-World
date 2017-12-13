@@ -13,30 +13,44 @@ public class River : FlowField
     /// </summary>
     public float waves = 3;
 
+    public int paddingCells = 2;
+
     /// <summary>
     /// Generate river vectors based on a sine wave.
     /// </summary>
     protected override void SetFlowVectors()
     {
         float maxAngle = Mathf.PI * 2 * waves;
-        float increment = maxAngle / Grid.GetLength(2); //Divide by length of z-axis, as this is the direction the wave should flow.
+        float increment = maxAngle / Grid.GetLength(1); //Divide by length of z-axis, as this is the direction the wave should flow.
 
         float curAngle = 0;
         for (int x=0; x<Grid.GetLength(0); x++)
         {
-            for (int y=0; y<Grid.GetLength(1); y++)
+            bool isPadding = x < paddingCells || x >= Grid.GetLength(0) - paddingCells;
+
+            for (int z=0; z<Grid.GetLength(1); z++)
             {
-                for (int z=0; z<Grid.GetLength(2); z++)
+                if (!isPadding)
                 {
                     //This is based on a sine wave, and the instantaneous velocity of a sin wave is given by cos
                     float derivative = Mathf.Cos(curAngle);
                     float angle = Mathf.Atan(derivative) * Mathf.Rad2Deg;
                     Vector3 flow = Quaternion.Euler(0, -angle, 0) * new Vector3(0, 0, 1);
-                    Grid[x, y, z] = flow;
+                    Grid[x, z] = flow;
                     curAngle += increment;
                 }
-                curAngle = 0;
+                else
+                {
+                    //Just push the vehicle back to the center if it's a padding cell so they don't leave the flow fields
+                    if (x < paddingCells)
+                        Grid[x, z] = Vector3.right;
+                    else
+                        Grid[x, z] = -Vector3.right;
+                }
             }
+            curAngle = 0;
         }
     }
+
+
 }

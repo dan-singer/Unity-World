@@ -15,10 +15,9 @@ public abstract class FlowField : MonoBehaviour {
 
     protected Renderer rend;
     protected Vector3 boundsSize;
-    protected Vector3 cellSize;
     protected DebugLineRenderer debugLineRenderer;
 
-    public Vector3[,,] Grid { get; protected set; }
+    public Vector3[,] Grid { get; protected set; }
 
 
 
@@ -30,13 +29,7 @@ public abstract class FlowField : MonoBehaviour {
 
         //Divide the size of the bounds in each dimension by unitsPerCell. 
         //In other words, we have a size in units times cells per unit, so units divide out, and we're left with number of cells in each dimension
-        Grid = new Vector3[(int)(boundsSize.x / unitsPerCell), (int)(boundsSize.y / unitsPerCell), (int)(boundsSize.z / unitsPerCell)];
-        //Now we can determine the size of each cell in each dimension, in case the box is not uniformly scaled
-        cellSize = new Vector3(
-            boundsSize.x / Grid.GetLength(0),
-            boundsSize.y / Grid.GetLength(1),
-            boundsSize.z / Grid.GetLength(2)
-        );
+        Grid = new Vector3[(int)(boundsSize.x / unitsPerCell), (int)(boundsSize.z / unitsPerCell)];
         //Let subclasses set the flow field vectors
         SetFlowVectors();
 	}
@@ -57,13 +50,12 @@ public abstract class FlowField : MonoBehaviour {
         Vector3 localPos = worldPosition - origin;
 
         //Divide by the cell size in each direction to determine the index in the grid array
-        int x = (int)(localPos.x / cellSize.x);
-        int y = (int)(localPos.y / cellSize.y);
-        int z = (int)(localPos.z / cellSize.z);
+        int x = (int)(localPos.x / unitsPerCell);
+        int z = (int)(localPos.z / unitsPerCell);
 
         //Confirm that each index is valid in the Grid array, otherwise return null
-        if (IndexInGrid(x, 0) && IndexInGrid(y, 1) && IndexInGrid(z, 2))
-            return Grid[x, y, z];
+        if (IndexInGrid(x, 0) && IndexInGrid(z, 1))
+            return Grid[x, z];
         else
             return null;
     }
@@ -93,13 +85,12 @@ public abstract class FlowField : MonoBehaviour {
         Vector3 origin = transform.position - rend.bounds.extents;
 
         for (int x = 0; x < Grid.GetLength(0); x++)
-            for (int y = 0; y < Grid.GetLength(1); y++)
-                for (int z = 0; z < Grid.GetLength(2); z++)
-                {
-                    Vector3 direction = Grid[x, y, z];
-                    Vector3 localPos = new Vector3(x * cellSize.x, y * cellSize.y, z * cellSize.z);
-                    Vector3 worldPos = origin + localPos;
-                    debugLineRenderer.DrawLine(0, worldPos, worldPos + direction);
-                }
+            for (int z = 0; z < Grid.GetLength(1); z++)
+            {
+                Vector3 direction = Grid[x, z];
+                Vector3 localPos = new Vector3(x, 0, z) * unitsPerCell;
+                Vector3 worldPos = origin + localPos;
+                debugLineRenderer.DrawLine(0, worldPos, worldPos + direction);
+            }
     }
 }
