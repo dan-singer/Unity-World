@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: c7e234764b358e34aa4b3c2b7e1a2ea8
+timeCreated: 1513148004
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 1
+    100002: 1_2
+    100004: Backbones_null_3
+    100006: //RootNode
+    100008: Bird_rig_3
+    100010: Bott_null_3
+    100012: Cervical_Vertbrae_00_jnt_3
+    100014: Cervical_Vertbrae_01_jnt_3
+    100016: Cervical_Vertbrae_02_jnt_3
+    100018: Cervical_Vertbrae_03_jnt_3
+    100020: Cervical_Vertbrae_04_jnt_3
+    100022: Cervical_Vertbrae_05_jnt_3
+    100024: Cube
+    100026: Head_con__3
+    100028: IK_spline_3
+    100030: Jaw_Con__3
+    100032: L_Humerus_jnt_3
+    100034: L_Phalanges_Digit_00_jnt_3
+    100036: L_Phalanges_Digit_01_jnt_3
+    100038: L_Phalanges_Digit_02_jnt_3
+    100040: L_Phalanges_Digit_03_jnt_3
+    100042: L_Radius_Ulna_jnt_3
+    100044: L_Wing_con__3
+    100046: L_Wing_goal_3
+    100048: L_wing_pole_3
+    100050: L_Wrist_jnt_3
+    100052: L_Wrist_null_3
+    100054: Lower_Beak_0000_jnt_3
+    100056: Lower_Beak_0100_jnt_3
+    100058: Lower_Beak_null_3
+    100060: Master_con__3
+    100062: Neck_Base_con__3
+    100064: Neck_null_3
+    100066: Neck_Top_con__3
+    100068: Null
+    100070: Null_2
+    100072: Peau
+    100074: R_Humerus_jnt_1_3
+    100076: R_Phalanges_Digit_00_jnt_1_3
+    100078: R_Phalanges_Digit_01_jnt_1_3
+    100080: R_Phalanges_Digit_02_jnt_1_3
+    100082: R_Phalanges_Digit_03_jnt_1_3
+    100084: R_Radius_Ulna_jnt_1_3
+    100086: R_Wing_con__1_3
+    100088: R_Wing_goal_1_3
+    100090: R_wing_pole_1_3
+    100092: R_Wrist_jnt_1_3
+    100094: R_Wrist_null_1_3
+    100096: Root_con__3
+    100098: Skull_0000_jnt_3
+    100100: Skull_0100_jnt_3
+    100102: Skull_null_3
+    100104: Spine_bott_00_jnt_3
+    100106: Spine_bott_01_jnt_3
+    100108: Spine_top_00_jnt_3
+    100110: Spine_top_01_jnt_3
+    100112: Sym?trie
+    100114: Tail_00_jnt_3
+    100116: Tail_01_jnt_3
+    100118: Tail_02_jnt_3
+    100120: Tail_03_jnt_3
+    100122: Tail_04_jnt_3
+    100124: Tail_05_jnt_3
+    100126: Tail_Bones_null
+    100128: Top_null_3
+    100130: Wing_1_3
+    100132: Wing_3
+    400000: 1
+    400002: 1_2
+    400004: Backbones_null_3
+    400006: //RootNode
+    400008: Bird_rig_3
+    400010: Bott_null_3
+    400012: Cervical_Vertbrae_00_jnt_3
+    400014: Cervical_Vertbrae_01_jnt_3
+    400016: Cervical_Vertbrae_02_jnt_3
+    400018: Cervical_Vertbrae_03_jnt_3
+    400020: Cervical_Vertbrae_04_jnt_3
+    400022: Cervical_Vertbrae_05_jnt_3
+    400024: Cube
+    400026: Head_con__3
+    400028: IK_spline_3
+    400030: Jaw_Con__3
+    400032: L_Humerus_jnt_3
+    400034: L_Phalanges_Digit_00_jnt_3
+    400036: L_Phalanges_Digit_01_jnt_3
+    400038: L_Phalanges_Digit_02_jnt_3
+    400040: L_Phalanges_Digit_03_jnt_3
+    400042: L_Radius_Ulna_jnt_3
+    400044: L_Wing_con__3
+    400046: L_Wing_goal_3
+    400048: L_wing_pole_3
+    400050: L_Wrist_jnt_3
+    400052: L_Wrist_null_3
+    400054: Lower_Beak_0000_jnt_3
+    400056: Lower_Beak_0100_jnt_3
+    400058: Lower_Beak_null_3
+    400060: Master_con__3
+    400062: Neck_Base_con__3
+    400064: Neck_null_3
+    400066: Neck_Top_con__3
+    400068: Null
+    400070: Null_2
+    400072: Peau
+    400074: R_Humerus_jnt_1_3
+    400076: R_Phalanges_Digit_00_jnt_1_3
+    400078: R_Phalanges_Digit_01_jnt_1_3
+    400080: R_Phalanges_Digit_02_jnt_1_3
+    400082: R_Phalanges_Digit_03_jnt_1_3
+    400084: R_Radius_Ulna_jnt_1_3
+    400086: R_Wing_con__1_3
+    400088: R_Wing_goal_1_3
+    400090: R_wing_pole_1_3
+    400092: R_Wrist_jnt_1_3
+    400094: R_Wrist_null_1_3
+    400096: Root_con__3
+    400098: Skull_0000_jnt_3
+    400100: Skull_0100_jnt_3
+    400102: Skull_null_3
+    400104: Spine_bott_00_jnt_3
+    400106: Spine_bott_01_jnt_3
+    400108: Spine_top_00_jnt_3
+    400110: Spine_top_01_jnt_3
+    400112: Sym?trie
+    400114: Tail_00_jnt_3
+    400116: Tail_01_jnt_3
+    400118: Tail_02_jnt_3
+    400120: Tail_03_jnt_3
+    400122: Tail_04_jnt_3
+    400124: Tail_05_jnt_3
+    400126: Tail_Bones_null
+    400128: Top_null_3
+    400130: Wing_1_3
+    400132: Wing_3
+    4300000: Cube
+    7400000: Base stack
+    9500000: //RootNode
+    13700000: Cube
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
