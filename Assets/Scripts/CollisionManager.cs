@@ -32,10 +32,18 @@ public class CollisionManager : MonoBehaviour {
     /// <summary>
     /// Graph representing collision checks this frame.
     /// </summary>
-    public Dictionary<Collider, HashSet<Collider>> CollisionChecksThisFrame { get; private set; }
+    public Dictionary<Collider, HashSet<Collider>> Collisions { get; private set; }
 
 
     private bool readyToUpdateColliders = false;
+
+
+    /// <summary>
+    /// These will be broadcast at various stages of the collision.
+    /// </summary>
+    private static string collisionMessage = "CollisionOccurring";
+    private static string collisionStartedMessage = "CollisionStarted";
+    private static string collisionEndedMessage = "CollisionEnded";
 
     /// <summary>
     /// Update the list of all the colliders.
@@ -48,59 +56,63 @@ public class CollisionManager : MonoBehaviour {
 
 
     /// <summary>
-    /// Inform the manager that a collision check has occured between object A and B.
-    /// </summary>
-    public void ReportCollisionCheckThisFrame(Collider A, Collider B)
-    {
-        if (!CollisionChecksThisFrame.ContainsKey(A))
-        {
-            CollisionChecksThisFrame[A] = new HashSet<Collider>() { B };
-        }
-        else
-        {
-            if (!CollisionChecksThisFrame[A].Contains(B))
-                CollisionChecksThisFrame[A].Add(B);
-        }
-        if (!CollisionChecksThisFrame.ContainsKey(B))
-        {
-            CollisionChecksThisFrame[B] = new HashSet<Collider>() { A };
-        }
-        else
-        {
-            if (!CollisionChecksThisFrame[B].Contains(A))
-                CollisionChecksThisFrame[B].Add(A);
-        }
-    }
-
-
-    /// <summary>
-    /// Checks to make sure that this pairing of objects has not already been checked this frame.
-    /// </summary>
-    public bool WasCollCheckAlreadyPerformed(Collider A, Collider B)
-    {
-        bool occured = false;
-        if (CollisionChecksThisFrame.ContainsKey(A))
-        {
-            if (CollisionChecksThisFrame[A].Contains(B))
-                occured = true;
-        }
-        return occured;
-    }
-
-    /// <summary>
     /// Initialize the CollisionManager.
     /// </summary>
     void Start () {
         AllColliders = Object.FindObjectsOfType<Collider>();
-        CollisionChecksThisFrame = new Dictionary<Collider, HashSet<Collider>>();
+        Collisions = new Dictionary<Collider, HashSet<Collider>>();
     }
-	
+
+    private void InformColliders(string msg, Collider A, Collider B)
+    {
+        A.BroadcastMessage(msg, B, SendMessageOptions.DontRequireReceiver);
+        B.BroadcastMessage(msg, A, SendMessageOptions.DontRequireReceiver);
+    }
+
+    /// <summary>
+    /// Loop through each collider, check for collisions, and notify them when they occur
+    /// </summary>
+    private void Update()
+    {
+        for (int i=0; i<AllColliders.Length-1; i++)
+        {
+            Collider A = AllColliders[i];
+            for (int j=i+1; j<AllColliders.Length; j++)
+            {
+                Collider B = AllColliders[j];
+                bool colliding;
+                if (A.collisionMethod == Collider.Method.AABB)
+                    colliding = A.AABB(B);
+                else
+                    colliding = A.BoundingCircle(B);
+                if (colliding)
+                {
+                    if (!Collisions.ContainsKey(A) || (Collisions.ContainsKey(A) && !Collisions[A].Contains(B)))
+                    {
+                        InformColliders(collisionStartedMessage, A, B);
+                        if (Collisions.ContainsKey(A))
+                            Collisions[A].Add(B);
+                        else
+                            Collisions.Add(A, new HashSet<Collider>());
+                    }
+                    InformColliders(collisionMessage, A, B);
+                }
+                else
+                {
+                    if (Collisions.ContainsKey(A) && Collisions[A].Contains(B))
+                    {
+                        InformColliders(collisionEndedMessage, A, B);
+                        Collisions[A].Remove(B);
+                    }
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Clear each CollisionChecks graph, and update AllColliders array if necessary.
     /// </summary>
-	void LateUpdate () {
-        //Since colliders will be adding to this in the update, we'll use this manager object to clear them after the update
-        CollisionChecksThisFrame.Clear();
+    void LateUpdate () {
 
         if (readyToUpdateColliders)
         {

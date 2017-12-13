@@ -42,6 +42,11 @@ public class FollowCam : MonoBehaviour {
             float zoom = Input.GetAxis("Mouse ScrollWheel");
             positionOffset.z += zoom * scrollSpeed;
 
+            //Clamp rotationOffset
+            rotationOffset.x = Mathf.Clamp(rotationOffset.x, -45, 45);
+            rotationOffset.y = Mathf.Clamp(rotationOffset.y, -45, 45);
+
+
         }
-	}
+    }
 }
