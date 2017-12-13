@@ -226,11 +226,11 @@ public abstract class Vehicle : MonoBehaviour {
                 continue;
 
             //Ignore objects too far away
-            float radSum = coll.Radius + obstacle.GetComponent<Collider>().InnerRadius;
-            if (obsLocalPos.sqrMagnitude > Math.Pow(radSum, 2))
+            if (obsLocalPos.sqrMagnitude > Math.Pow(avoidRadius, 2))
                 continue;
 
             //Test for non-intersection
+            float radSum = coll.Radius + obstacle.GetComponent<Collider>().InnerRadius;
             float rightProj = Vector3.Dot(transform.right, obsLocalPos);
             if (Mathf.Abs(rightProj) > radSum)
                 continue;

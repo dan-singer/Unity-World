@@ -15,6 +15,25 @@ public class FlowFollower : Vehicle
             netForce += FollowFlowField(currentFlowField, transform.position + Velocity * flowFieldInfo.secondsAhead) * flowFieldInfo.weight;
         }
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
+
+
+        if (currentFlowField)
+        {
+            Bounds bounds = currentFlowField.GetComponent<Renderer>().bounds;
+            if (transform.position.z > bounds.max.z)
+            {
+                transform.position = new Vector3
+                {
+                    x = transform.position.x,
+                    y = transform.position.y,
+                    z = bounds.min.z
+                };
+                print("looping");
+            }
+        }
+
+
+
         ApplyForce(netForce);
     }
 
@@ -27,9 +46,5 @@ public class FlowFollower : Vehicle
     }
     private void CollisionEnded(Collider coll)
     {
-        if (coll.GetComponent<FlowField>())
-        {
-            currentFlowField = null;
-        }
     }
 }
