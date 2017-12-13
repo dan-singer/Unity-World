@@ -32,7 +32,10 @@ public class GameManager : MonoBehaviour {
 
     private Transform camTemplate;
     private int currentView = 0;
-    // Use this for initialization
+
+    /// <summary>
+    /// Store the agents in lists and setup the camera
+    /// </summary>
     void Start () {
         Foragers = GameObject.FindObjectsOfType<PathFollower>().ToList<Vehicle>();
         FlockManagers = GameObject.FindObjectsOfType<FlockManager>().ToList<FlockManager>();
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour {
         MakeNewViewForTarget(Foragers[0].transform);
         MakeNewViewForTarget(FlockManagers[0].Flock[0].transform);
 
+        //Do not draw debug lines by default
         DebugLineRenderer.Draw = false;
     }
 
@@ -101,6 +105,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Set the debug line mode. 
+    /// </summary>
+    /// <param name="val">True to draw lines and area of resistance, false otherwise</param>
     public void SetDebugLineMode(bool val)
     {
         DebugLineRenderer.Draw = val;

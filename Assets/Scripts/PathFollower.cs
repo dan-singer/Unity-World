@@ -12,8 +12,7 @@ public class PathFollower : Vehicle
     enum State
     {
         FollowingPath,
-        Foraging,
-        Placing
+        Foraging
     }
 
     private State state;
@@ -22,12 +21,10 @@ public class PathFollower : Vehicle
     public GameObject foodDropZone;
     private GameObject foodTarget;
 
-    protected override void Start()
-    {
-        base.Start();
 
-    }
-
+    /// <summary>
+    /// Apply forces to simulate forager behaviour
+    /// </summary>
     protected override void CalcSteeringForces()
     {
         Vector3 netForce = Vector3.zero;
@@ -39,8 +36,6 @@ public class PathFollower : Vehicle
             case State.Foraging:
                 netForce += Arrive(foodTarget.transform.position) * arrivalInfo.weight;
                 break;
-            case State.Placing:
-                break;
             default:
                 break;
         }
@@ -49,6 +44,10 @@ public class PathFollower : Vehicle
         ApplyForce(netForce);
     }
 
+    /// <summary>
+    /// Handle state changes based on what the forager collides with
+    /// </summary>
+    /// <param name="coll"></param>
     private void CollisionStarted(Collider coll)
     {
         if (coll.GetComponent<FoodManager>() && !foodTarget)
@@ -75,9 +74,5 @@ public class PathFollower : Vehicle
             foodTarget = null;
 
         }
-    }
-    private void CollisionEnded(Collider coll)
-    {
-
     }
 }

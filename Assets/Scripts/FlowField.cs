@@ -21,7 +21,9 @@ public abstract class FlowField : MonoBehaviour {
 
 
 
-    // Use this for initialization
+    /// <summary>
+    /// Initialize the grid of flow field vectors.
+    /// </summary>
     void Start () {
         rend = GetComponent<Renderer>();
         debugLineRenderer = GetComponent<DebugLineRenderer>();

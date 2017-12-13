@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Contains info on each of the collders as well as optimization methods for collision detection.
+/// Singleton that checks for collisions among each of the colliders and notifies them when they occur
 /// </summary>
 /// <author>Dan Singer</author>
 public class CollisionManager : MonoBehaviour {
@@ -26,7 +26,7 @@ public class CollisionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// An array of all the colliders in the scene.
+    /// A list of all the colliders in the scene.
     /// </summary>
     public List<Collider> AllColliders { get; private set; }
 
@@ -36,14 +36,17 @@ public class CollisionManager : MonoBehaviour {
     public Dictionary<Collider, HashSet<Collider>> Collisions { get; private set; }
 
 
+    /// <summary>
+    /// The following are used to queue collision additions and removals 
+    /// until lateupdate so they're not changed while being iterated over
+    /// </summary>
     private bool readyToUpdateColliders = false;
-
     private Queue<Collider> collidersToRemove;
     private Queue<Collider> collidersToAdd;
 
 
     /// <summary>
-    /// These will be broadcast at various stages of the collision.
+    /// These will be broadcasted at various stages of the collision to the colliders's GameObjects and their components
     /// </summary>
     private static string collisionMessage = "CollisionOccurring";
     private static string collisionStartedMessage = "CollisionStarted";
@@ -59,7 +62,7 @@ public class CollisionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Add a collider to the list. This is only necessary if a collider is spawned during gameplay.
+    /// Add a collider to the list. This is only necessary to do if a collider is spawned during gameplay and after Start.
     /// </summary>
     public void AddCollider(Collider toAdd)
     {
@@ -87,7 +90,7 @@ public class CollisionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Loop through each collider, check for collisions, and notify them when they occur
+    /// Loop through each collider, check for collisions, and notify the collider's gameobject's components when they occur.
     /// </summary>
     private void Update()
     {
@@ -131,7 +134,6 @@ public class CollisionManager : MonoBehaviour {
     /// </summary>
     void LateUpdate () {
 
-        //Handle collider removal after update loop so we don't 
         if (readyToUpdateColliders)
         {
             while (collidersToRemove.Count > 0)

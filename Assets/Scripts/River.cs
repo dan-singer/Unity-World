@@ -6,6 +6,7 @@ using UnityEngine;
 /// <summary>
 /// River implementation of a FlowField
 /// </summary>
+/// <author>Dan Singer</author>
 public class River : FlowField
 {
     /// <summary>

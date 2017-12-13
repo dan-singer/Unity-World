@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Component which causes this gameobject to snap to the ground, rather than just the terrain.
+/// Component which causes this gameobject to snap to the whatever is below it rather than just the terrain.
 /// </summary>
+/// <author>Dan Singer</author>
 public class SnapToGround : MonoBehaviour
 {
 
     public bool centerPivot = true;
     public Renderer rend;
 
-    // Use this for initialization
     void Start()
     {
         if (!rend)
             rend = GetComponent<Renderer>();
-
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Snap to the ground using raycasting
+    /// </summary>
     void Update()
     {
         float yOffset = centerPivot ? rend.bounds.extents.y : 0;

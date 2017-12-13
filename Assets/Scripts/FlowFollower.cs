@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents an object that will follow a flow field. 
+/// </summary>
+/// <author>Dan Singer</author>
 public class FlowFollower : Vehicle
 {
     private FlowField currentFlowField;
 
+    /// <summary>
+    /// Follow the flow field and loop around it if the end of it is reached.
+    /// </summary>
     protected override void CalcSteeringForces()
     {
         Vector3 netForce = Vector3.zero;
-        //TODO: refactor vehicle class such that parameters don't need to be provided, but are just read from the info objects.
         netForce += FollowFlowField(flowFieldInfo.flowField, transform.position + Velocity * flowFieldInfo.secondsAhead) * flowFieldInfo.weight;
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
 
@@ -24,17 +30,6 @@ public class FlowFollower : Vehicle
                 z = bounds.min.z
             };
         }
-
-
-
         ApplyForce(netForce);
-    }
-
-    private void CollisionStarted(Collider coll)
-    {
-
-    }
-    private void CollisionEnded(Collider coll)
-    {
     }
 }

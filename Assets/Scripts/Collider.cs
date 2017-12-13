@@ -16,10 +16,10 @@ public class Collider : MonoBehaviour {
 
     public Method collisionMethod;
 
+    /// <summary>
+    /// The renderer to use for collisions. If there is not one specified, it will use the one attached to the GameObject, if there is one.
+    /// </summary>
     public Renderer renderer;
-
-
-
 
     /// <summary>
     /// Radius of a sphere encapsulating the mesh.
@@ -42,7 +42,6 @@ public class Collider : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
     void Start() {
         if (!renderer)
             renderer = GetComponent<Renderer>();

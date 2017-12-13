@@ -28,6 +28,9 @@ public class FlockManager : MonoBehaviour {
         SpawnFlockers();
 	}
 
+    /// <summary>
+    /// Spawn flockers in the spawnContainer
+    /// </summary>
     public void SpawnFlockers()
     {
         Flock = new List<Flocker>();
@@ -48,7 +51,9 @@ public class FlockManager : MonoBehaviour {
         }
     }
 	
-	// Update is called once per frame
+	/// <summary>
+    /// Keep track of the flock's center and average direction here so each flock member doesn't have to do it.
+    /// </summary>
 	void Update () {
 
         Vector3 center = Vector3.zero;

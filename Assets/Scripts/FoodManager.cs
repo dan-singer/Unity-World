@@ -20,7 +20,9 @@ public class FoodManager : MonoBehaviour {
 
 
 
-	// Use this for initialization
+    /// <summary>
+    /// Initialize and spawn food
+    /// </summary>
 	void Start () {
         rend = GetComponent<Renderer>();
         terrain = Terrain.activeTerrain;
@@ -67,9 +69,4 @@ public class FoodManager : MonoBehaviour {
             foodQueue.Enqueue(food);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

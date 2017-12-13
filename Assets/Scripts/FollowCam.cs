@@ -20,7 +20,9 @@ public class FollowCam : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	/// <summary>
+    /// Smoothly go to and look at the target, incorporating offsets.
+    /// </summary>
 	void Update () {
         if (!target)
             return;

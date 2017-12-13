@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Behaviour for agent that travels in a flock
+/// Behaviour for an agent that travels in a flock
 /// </summary>
+/// <author>Dan Singer</author>
 public class Flocker : Vehicle
 {
 
     public FlockManager Manager { get; set; }
 
+    /// <summary>
+    /// Apply flocking forces
+    /// </summary>
     protected override void CalcSteeringForces()
     {
         Vector3 netForce = Vector3.zero;
