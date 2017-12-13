@@ -37,7 +37,7 @@ public abstract class Vehicle : MonoBehaviour {
     public PursueEvadeInfo pursueInfo;
     public PursueEvadeInfo evadeInfo;
     public SForceRadiusInfo arrivalInfo;
-    public SForceInfo constrainInfo;
+    public ConstrainInfo constrainInfo;
     public SForceRadiusInfo avoidInfo;
     public SForceRadiusInfo separationInfo;
     public WanderInfo wanderInfo;
@@ -264,12 +264,19 @@ public abstract class Vehicle : MonoBehaviour {
     /// </summary>
     protected Vector3 ConstrainTo(Bounds bounds)
     {
-        float x = transform.position.x; float z = transform.position.z;
+        float x = transform.position.x; float y = transform.position.y; float z = transform.position.z;
         Vector3 min = bounds.center - bounds.extents;
         Vector3 max = bounds.center + bounds.extents;
         bool outside = x < min.x || x > max.x || z < min.z || z > max.z;
+
+        float ySeekLoc = transform.position.y;
+        if (!ignoreY)
+        {
+            outside = outside || y < min.y || y > max.y;
+            ySeekLoc = bounds.center.y;
+        }
         if (outside)
-            return Seek(new Vector3(bounds.center.x, transform.position.y, bounds.center.z));
+            return Seek(new Vector3(bounds.center.x, ySeekLoc, bounds.center.z));
         else
             return Vector3.zero;
     }

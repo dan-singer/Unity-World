@@ -20,6 +20,9 @@ public class Flocker : Vehicle
             netForce += Align(Manager.AverageDirection) * alignInfo.weight;
             netForce += Cohere(Manager.Center) * cohereInfo.weight;
         }
+        netForce += ConstrainTo(constrainInfo.constrainArea.bounds) * constrainInfo.weight;
+        //Ideally, only one flocker should have a non-zero wander weight. This will be the "leader"
+        netForce += Wander(wanderInfo.unitsAhead, wanderInfo.radius) * wanderInfo.weight;
 
         netForce = Vector3.ClampMagnitude(netForce, maxForce);
         ApplyForce(netForce);

@@ -30,8 +30,14 @@ public class WanderInfo : SForceRadiusInfo{
     public float unitsAhead;
 }
 [System.Serializable]
+///Group information for a flow field
 public class FlowFieldInfo : PursueEvadeInfo{
     public FlowField flowField;
+}
+[System.Serializable]
+///Group information for the constraining 
+public class ConstrainInfo : SForceInfo{
+    public Renderer constrainArea;
 }
 
 [System.Serializable]

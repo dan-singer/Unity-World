@@ -10,7 +10,9 @@ public class FlockManager : MonoBehaviour {
 
     public int spawnQuantity = 5;
     public Flocker flockerPrefab;
+    public Flocker flockerLeaderPrefab;
     public Renderer spawnContainer;
+    public Renderer flyZone;
 
     public List<Flocker> Flock { get; private set; }
 
@@ -34,7 +36,13 @@ public class FlockManager : MonoBehaviour {
         {
             Vector3 spawnLoc = new Vector3(Random.Range(spawnBounds.min.x, spawnBounds.max.x),
                 Random.Range(spawnBounds.min.y, spawnBounds.max.y), Random.Range(spawnBounds.min.z, spawnBounds.max.z));
-            Flocker flocker = Instantiate<Flocker>(flockerPrefab, spawnLoc, Quaternion.LookRotation(spawnContainer.transform.forward));
+            Flocker prefab;
+            if (i == 0)
+                prefab = flockerLeaderPrefab;
+            else
+                prefab = flockerPrefab;
+            Flocker flocker = Instantiate<Flocker>(prefab, spawnLoc, Quaternion.LookRotation(spawnContainer.transform.forward));
+            flocker.constrainInfo.constrainArea = flyZone;
             flocker.Manager = this;
             Flock.Add(flocker);
         }
