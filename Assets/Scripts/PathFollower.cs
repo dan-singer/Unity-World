@@ -59,7 +59,7 @@ public class PathFollower : Vehicle
         if (foodTarget && coll.gameObject.GetInstanceID() == foodTarget.GetInstanceID())
         {
             foodTarget.transform.parent = this.transform;
-            foodTarget.transform.localPosition = new Vector3(0, 1, 0);
+            foodTarget.transform.localPosition = new Vector3(0, GetComponent<Collider>().renderer.bounds.extents.y*2.5f, 0);
             state = State.FollowingPath;
         }
         if (foodTarget && coll.gameObject.GetInstanceID() == foodDropZone.GetInstanceID())

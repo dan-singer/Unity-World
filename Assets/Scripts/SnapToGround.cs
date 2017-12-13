@@ -25,7 +25,7 @@ public class SnapToGround : MonoBehaviour
         float yOffset = centerPivot ? rend.bounds.extents.y : 0;
 
         RaycastHit info;
-        if (Physics.Raycast(new Ray(transform.position, -transform.up), out info, 5))
+        if (Physics.Raycast(new Ray(transform.position + Vector3.up, -transform.up), out info, 10))
         {
             transform.position = new Vector3(transform.position.x, info.point.y + yOffset, transform.position.z);
         }

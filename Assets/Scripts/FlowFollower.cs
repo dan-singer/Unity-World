@@ -23,7 +23,6 @@ public class FlowFollower : Vehicle
                 y = transform.position.y,
                 z = bounds.min.z
             };
-            print("looping");
         }
 
 

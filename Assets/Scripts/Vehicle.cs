@@ -369,7 +369,7 @@ public abstract class Vehicle : MonoBehaviour {
             {
                 projectedPt = Vector3.Distance(transform.position, start) < Vector3.Distance(transform.position, end) ? start : end;
             }
-            debugLineRenderer.DrawLine(0, transform.position, projectedPt);
+            //debugLineRenderer.DrawLine(0, transform.position, projectedPt);
 
             //Calculate distance to that normal point
             float distToNormal = (projectedPt - futureLoc).magnitude;

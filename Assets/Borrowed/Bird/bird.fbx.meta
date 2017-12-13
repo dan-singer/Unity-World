@@ -165,7 +165,169 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Base stack
+      takeName: Base stack
+      firstFrame: 0
+      lastFrame: 200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 1
+        weight: 1
+      - path: 1/Bird_rig_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null/Tail_00_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null/Tail_00_jnt_3/Tail_01_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null/Tail_00_jnt_3/Tail_01_jnt_3/Tail_02_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null/Tail_00_jnt_3/Tail_01_jnt_3/Tail_02_jnt_3/Tail_03_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null/Tail_00_jnt_3/Tail_01_jnt_3/Tail_02_jnt_3/Tail_03_jnt_3/Tail_04_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Bott_null_3/Spine_bott_00_jnt_3/Spine_bott_01_jnt_3/Tail_Bones_null/Tail_00_jnt_3/Tail_01_jnt_3/Tail_02_jnt_3/Tail_03_jnt_3/Tail_04_jnt_3/Tail_05_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3/Skull_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3/Skull_null_3/Lower_Beak_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3/Skull_null_3/Lower_Beak_null_3/Lower_Beak_0000_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3/Skull_null_3/Lower_Beak_null_3/Lower_Beak_0000_jnt_3/Lower_Beak_0100_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3/Skull_null_3/Skull_0000_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/Cervical_Vertbrae_00_jnt_3/Cervical_Vertbrae_01_jnt_3/Cervical_Vertbrae_02_jnt_3/Cervical_Vertbrae_03_jnt_3/Cervical_Vertbrae_04_jnt_3/Cervical_Vertbrae_05_jnt_3/Skull_null_3/Skull_0000_jnt_3/Skull_0100_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Top_null_3/Spine_top_00_jnt_3/Spine_top_01_jnt_3/Neck_null_3/IK_spline_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3/R_Wrist_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3/R_Wrist_jnt_1_3/R_Wrist_null_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3/R_Wrist_jnt_1_3/R_Wrist_null_1_3/R_Phalanges_Digit_00_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3/R_Wrist_jnt_1_3/R_Wrist_null_1_3/R_Phalanges_Digit_00_jnt_1_3/R_Phalanges_Digit_01_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3/R_Wrist_jnt_1_3/R_Wrist_null_1_3/R_Phalanges_Digit_00_jnt_1_3/R_Phalanges_Digit_01_jnt_1_3/R_Phalanges_Digit_02_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_Humerus_jnt_1_3/R_Radius_Ulna_jnt_1_3/R_Wrist_jnt_1_3/R_Wrist_null_1_3/R_Phalanges_Digit_00_jnt_1_3/R_Phalanges_Digit_01_jnt_1_3/R_Phalanges_Digit_02_jnt_1_3/R_Phalanges_Digit_03_jnt_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_1_3/R_wing_pole_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3/L_Wrist_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3/L_Wrist_jnt_3/L_Wrist_null_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3/L_Wrist_jnt_3/L_Wrist_null_3/L_Phalanges_Digit_00_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3/L_Wrist_jnt_3/L_Wrist_null_3/L_Phalanges_Digit_00_jnt_3/L_Phalanges_Digit_01_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3/L_Wrist_jnt_3/L_Wrist_null_3/L_Phalanges_Digit_00_jnt_3/L_Phalanges_Digit_01_jnt_3/L_Phalanges_Digit_02_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_Humerus_jnt_3/L_Radius_Ulna_jnt_3/L_Wrist_jnt_3/L_Wrist_null_3/L_Phalanges_Digit_00_jnt_3/L_Phalanges_Digit_01_jnt_3/L_Phalanges_Digit_02_jnt_3/L_Phalanges_Digit_03_jnt_3
+        weight: 1
+      - path: 1/Bird_rig_3/1_2/Backbones_null_3/Wing_3/L_wing_pole_3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/L_Wing_con__3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/L_Wing_con__3/L_Wing_goal_3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/R_Wing_con__1_3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/R_Wing_con__1_3/R_Wing_goal_1_3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/Root_con__3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/Root_con__3/Neck_Base_con__3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/Root_con__3/Neck_Top_con__3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/Root_con__3/Neck_Top_con__3/Head_con__3
+        weight: 1
+      - path: 1/Bird_rig_3/Master_con__3/Root_con__3/Neck_Top_con__3/Head_con__3/Jaw_Con__3
+        weight: 1
+      - path: Sym?trie
+        weight: 1
+      - path: Sym?trie/Cube
+        weight: 1
+      - path: Sym?trie/Cube/Null
+        weight: 1
+      - path: Sym?trie/Cube/Null_2
+        weight: 1
+      - path: Sym?trie/Peau
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
